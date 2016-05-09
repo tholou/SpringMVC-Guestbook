@@ -1,9 +1,23 @@
 # SpringMVC-Guestbook
 
-Create a Spring MVC based web application, a guestbook – users can leave comments and reply to other comments.
+Purpose of this project is to create a Spring MVC based web application, a guestbook – users can leave comments and reply to other comments.
 
-Requirements:
+## Quickstart
 
+NOTE: The Quickstart requires Java 8, Maven 3 and a recent Git (2.2.x preferred) to be available on your machine. 
+
+[source, shell]
+----
+$ git clone https://github.com/tholou/SpringMVC-Guestbook.git
+$ cd guestBook
+$ mvn clean package
+$ mvn spring-boot:run
+----
+
+After that point your browser to `http://localhost:8080`.
+
+
+### Requirements:
 • Functional requirements:
 
 FR1. The user can enter the following data: name, e-mail and comment
