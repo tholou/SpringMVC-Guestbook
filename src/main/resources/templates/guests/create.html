@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>New Guest</title>
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
+</head>
+<body>
+
+<div class="container">
+<div class="panel panel-default">
+  <div class="panel-heading">New Guest</div>
+  <div class="panel-body">
+
+    <form class="form-horizontal" role="form" th:object="${guest}" th:method="post" th:action="@{/guests}" >
+      <!-- <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">Name</label>
+        <input type="text" th:field="*{name}"></input>
+        
+      </div>
+      <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">Email</label>
+        <input type="text" th:field="*{email}"></input>
+      </div>
+      <div class="form-group" th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}">
+        <label for="name" class="col-sm-2 control-label">Comment</label>
+        <input type="text" th:field="*{comment}"></input>
+      </div>
+      <button class="btn btn-default" type="submit">Save</button> -->
+      <table>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" th:field="*{name}" /></td>
+                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="text" th:field="*{email}" /></td>
+                    <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>
+                </tr>
+                <tr>
+                    <td>Comment:</td>
+                    <td><input type="text" th:field="*{comment}" /></td>
+                    <td th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}">Comment Error</td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Submit</button></td>
+                </tr>
+            </table>
+    </form>
+  </div>
+  </div>
+</div>
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+</html>

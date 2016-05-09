@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>List all Guests</title>
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
+</head>
+<body>
+
+<div class="container">
+<div class="panel panel-default">
+  <div class="panel-heading">List of Guests</div>
+  <div class="panel-body">
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Comment</th>
+                <!-- <th>Actions</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="guest : ${guests}">
+                <td th:text="${guest.name}"></td>
+                <td th:text="${guest.email}"></td>
+                <td th:text="${guest.comment}"></td>
+                <!-- <td>
+                <form style ='float:left; padding:5px; height:0px' th:method="get" th:action="@{'/plants/'+${plant.id}}"><button class="btn btn-default btn-xs" type="submit"><span class="glyphicon glyphicon-search"></span></button></form>
+                <form style ='float:left; padding:5px; height:0px' th:method="get" th:action="@{'/plants/'+${plant.id}+'/form'}"><button class="btn btn-default btn-xs" type="submit"><span class="glyphicon glyphicon-pencil"></span></button></form>
+                <form style ='float:left; padding:5px; height:0px' th:method="delete" th:action="@{'/plants/'+${plant.id}}"><button class="btn btn-default btn-xs" type="submit"><span class="glyphicon glyphicon-trash"></span></button></form>
+                </td> -->
+            </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-default" th:href="@{/guests/form}">Add a new guest</a>
+    </div>
+    </div>
+</div>
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+</html>
