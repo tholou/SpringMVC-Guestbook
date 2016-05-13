@@ -40,7 +40,7 @@
 						<h4>Replies:</h4>
 						<div id="replies">
 							<ul th:each="reply, it : ${entry.guestReplies}" th:with="index = ${it.count}">
-								<li th:text="${reply.name} + '. ' + '   ' + 'Comment:'  + ${reply.comment}"></li>
+								<li th:text="${reply.comment} +  '. ' + 'replied by ---> ' +    ${reply.name}  "></li>
 							</ul>
 						</div>
 						<button th:class="reply" th:id="${entry.id}" th:onclick="'reply('+${entry.id}+')'">Reply</button>
