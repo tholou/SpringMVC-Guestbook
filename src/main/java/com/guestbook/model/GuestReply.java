@@ -1,17 +1,12 @@
 package com.guestbook.model;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.validator.constraints.Email;
@@ -20,7 +15,7 @@ import org.springframework.util.Assert;
 
 @Entity
 @XmlRootElement
-public class Guest {
+public class GuestReply {
 	
 	@Id
     @GeneratedValue
@@ -32,21 +27,10 @@ public class Guest {
 	@NotBlank
 	private String comment;
 	private LocalDateTime date;
+	@ManyToOne
+	Guest guest;
 	
-	@OneToMany(mappedBy = "guest", cascade = CascadeType.ALL)
-    public final Set<GuestReply> guestReplies = new HashSet<GuestReply>();
-	
-	
-	public Set<GuestReply> getGuestReply() {
-	        return Collections.unmodifiableSet(this.guestReplies);
-	}
-
-	/*public void addGuestReply(GuestReply guestReply) {
-		 guestReply.setGuest(this);
-	     this.guestReplies.add(guestReply);
-	}*/
-	
-	public Guest(String name, String email, String comment){
+	public GuestReply(String name, String email, String comment){
 		
 		Assert.hasText(name, "Name must not be null or empty!");
 		Assert.hasText(comment, "Comment must not be null or empty!");
@@ -55,18 +39,21 @@ public class Guest {
 		this.setEmail(email);
 		this.setComment(comment);
 		this.date = LocalDateTime.now();
+		
+		
+		
 	}
 	
-	//public List<GuestReply> getGuestReply() {
-	//	return guestReply;
-	//}
+	public Guest getGuest() {
+		return guest;
+	}
 
-	//public void setGuestReply(List<GuestReply> guestReply) {
-	//	this.guestReply = guestReply;
-	//}
+	public void setGuest(Guest guest) {
+		this.guest = guest;
+	}
 
 	@SuppressWarnings("unused")
-	public Guest() {
+	public GuestReply() {
 		this.name = null;
 		this.email = null;
 		this.comment = null;
@@ -108,5 +95,7 @@ public class Guest {
 		this.comment = comment;
 	}
 	
+
+
 
 }

@@ -7,7 +7,11 @@ import com.guestbook.model.Guest;
 
 
 
+
 @Repository
 public interface GuestRepository extends JpaRepository<Guest, Long> {
+	
+	//@Query("select g from Guest g LEFT JOIN FETCH g.guestReplies")
+    //List<GuestReply> findAllGuests();
 
 }

@@ -1,0 +1,72 @@
+
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />		
+		<!-- <script th:src="@{/webjars/jquery/2.1.3/jquery.min.js}"></script> -->		
+		<script th:src="@{//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js}">...</script>
+		<script th:src="@{//cdnjs.cloudflare.com/ajax/libs/sweetalert/0.5.0/sweet-alert.min.js}"></script>		
+		<script th:src="@{/js/guestbook.js}"></script>
+		<script th:src="@{/js/swal-form.js}"></script>
+		<script th:src="@{/js/comment.js}"></script>		
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+		<link rel="stylesheet" href="/css/style.css" type="text/css" />
+		<link rel="stylesheet" href="/css/swal-form.css" type="text/css" />
+		<title th:text="#{guestbook.title}">Guestbook</title>
+	</head>
+	<body>
+		<h1 class="text-center" th:text="#{guestbook.title}">Guestbook</h1>
+	
+		<div class="checkbox text-center">
+	    	<input type="checkbox" id="use_ajax" />
+	    	<label for="use_ajax" th:text="#{guestbook.useajax}">Use Ajax</label>
+	  	</div>
+
+		<div id="entries">			
+			<div th:each="entry, it : ${entries}" th:with="index = ${it.count}">
+				<div class="panel panel-default" th:fragment="entry" th:id="entry+${entry.id}">
+					<div class="panel-heading" >
+						<!-- <form th:method="delete" th:action="@{/guestbook/} + ${entry.id}" th:attr="data-entry-id=${entry.id}">
+							<button class="btn btn-default pull-right" >
+								<span class="glyphicon glyphicon-remove"></span>
+							</button>
+						</form> -->
+						<h3 th:text="${index} + '. ' + ${entry.name}">1. Posting</h3>
+					</div>
+					<div class="panel-body">
+						<blockquote class="entrytext" th:text="${entry.comment}"></blockquote>
+						<h4>Replies:</h4>
+						<div id="replies">
+							<ul th:each="reply, it : ${entry.guestReplies}" th:with="index = ${it.count}">
+								<li th:text="${reply.name} + '. ' + '   ' + 'Comment:'  + ${reply.comment}"></li>
+							</ul>
+						</div>
+						<button th:class="reply" th:id="${entry.id}" th:onclick="'reply('+${entry.id}+')'">Reply</button>
+						<!-- <input type="hidden" th:id="guest_id" th:class="guest_id" th:value="${entry.id}" /> -->									
+						<!-- <footer class="date" th:text="${#temporals.format(entry.date, 'dd. MMMM yyyy - HH:mm')}">Date</footer> -->						
+					</div>
+				</div>
+			</div>
+		</div>
+
+	
+		<form method="post" role="form" class="gb-form" id="form" th:action="@{/guestbook}" th:object="${form}">
+			  <div class="form-group">
+					<label for="name" th:text="#{guestbook.form.name}">Name</label><br /> 
+					<input class="form-control" type="text" th:field="*{name}" th:errorclass="fieldError" required="required" /><br /> 
+			  </div>
+			  <div class="form-group" >
+					<label for="email" th:text="#{guestbook.form.email}">Email</label><br /> 
+					<input class="form-control" type="email" th:field="*{email}"  /><br />
+					<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="help-block">error!</span><br />					
+			  </div>
+			  <div class="form-group">
+					<label for="text" th:text="#{guestbook.form.comment}">Comment</label><br /> 
+					<textarea th:field="*{comment}" th:errorclass="fieldError" class="form-control" required="required"></textarea><br /> 
+			  </div>
+			  <input type="submit" class="btn btn-default" th:value="#{guestbook.form.submit}" value="Sender" />			  
+		</form>	
+	</body>	
+</html>
