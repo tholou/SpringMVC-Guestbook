@@ -17,7 +17,7 @@ $ mvn clean package
 $ mvn spring-boot:run
 ----
 
-After that point your browser to `http://localhost:8080`.
+After that point your browser to `http://localhost:8080/guestbook`.
 
 
 ### Requirements:
